@@ -25,3 +25,37 @@ li.CodeMirror-hint-active.custom{
 ul.CodeMirror-hints {
   max-height: 300px;
 }
+
+span {
+  &.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+
+    &.info {
+      color: #fff;
+      background-color: #007fff;
+    }
+
+    &.debug {
+      color: #000;
+      background-color: #ddd;
+    }
+
+    &.warn {
+      color: #000;
+      background-color: #ffc107;
+    }
+    
+    &.error {
+      color: #fff;
+      background-color: #dc3545;
+    }
+  }
+}

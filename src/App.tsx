@@ -9,6 +9,8 @@ import ReactFilterBox, {
 import { Table, Column, Cell } from "fixed-data-table";
 import "fixed-data-table/dist/fixed-data-table.min.css";
 
+import moment from "moment";
+
 import "./styles.scss";
 
 // TODO Use axios or any other rest client to get the data
@@ -50,13 +52,20 @@ export default function App() {
         rowHeight={50}
         rowsCount={data.length}
         width={800}
-        height={300}
+        height={500}
         headerHeight={50}
       >
         <Column
-          header={<Cell>Level</Cell>}
-          cell={({ rowIndex: index }) => <Cell>{data[index].level}</Cell>}
-          width={200}
+          header={<Cell>Date</Cell>}
+          cell={({ rowIndex: index }) => (
+            <Cell>
+              {moment(
+                data[index].instant.epochSecond +
+                  data[index].instant.nanoOfSecond * 1e-9
+              ).format("hh:mm:ss.SSS")}
+            </Cell>
+          )}
+          width={110}
         />
         <Column
           header={<Cell>Class</Cell>}
@@ -65,8 +74,15 @@ export default function App() {
         />
         <Column
           header={<Cell>Message</Cell>}
-          cell={({ rowIndex: index }) => <Cell>{data[index].message}</Cell>}
-          width={400}
+          cell={({ rowIndex: index }) => (
+            <Cell>
+              <span className={"badge " + data[index].level.toLowerCase()}>
+                {data[index].level}
+              </span>{" "}
+              {data[index].message}
+            </Cell>
+          )}
+          width={600}
         />
       </Table>
     </div>
